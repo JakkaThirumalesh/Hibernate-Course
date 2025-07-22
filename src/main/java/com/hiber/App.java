@@ -1,6 +1,8 @@
 package com.hiber;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 public class App 
@@ -22,8 +24,21 @@ public class App
         //--------------------------------
         
         SessionFactory factory = HibernateUtil.getSessionFactory();
-        System.out.println(factory);
         
+        Student st = new Student();
+        st.setId(1);
+        st.setName("Aman");
+        st.setEmail("aman@gmail.com");
+        st.setAddress("India");
         
+        Session session = factory.openSession();
+        
+        Transaction tx = session.beginTransaction();
+        
+        session.save(st);
+        
+        tx.commit();
+        
+        session.close();
     }
 }
