@@ -1,41 +1,33 @@
 package com.hiber;
 
+import java.util.Date;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 public class App 
 {
     public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-        //--------------------------------
-//        Configuration cfg = new Configuration();
-//        cfg.configure();
-//        
-//        SessionFactory factory = cfg.buildSessionFactory();
-//        System.out.println(factory);
-        
-        //--------------------------------
-//        SessionFactory factory = new Configuration().configure().buildSessionFactory();
-//        System.out.println(factory);
-        
-        //--------------------------------
-        
+    {        
         SessionFactory factory = HibernateUtil.getSessionFactory();
         
-        Student st = new Student();
-        st.setId(1);
-        st.setName("Aman");
-        st.setEmail("aman@gmail.com");
-        st.setAddress("India");
+        System.out.println(factory);
+       
+        Employee emp = new Employee();
+        
+        emp.setEmpName("ujjwal");
+        emp.setEmail("ujjwal@gmail.com");
+        emp.setSalary(10000.0);
+        emp.setStatus("Active");
+        emp.setJoiningDate(new Date());
+        emp.setToken("A123");
         
         Session session = factory.openSession();
         
         Transaction tx = session.beginTransaction();
         
-        session.save(st);
+        session.save(emp);
         
         tx.commit();
         
